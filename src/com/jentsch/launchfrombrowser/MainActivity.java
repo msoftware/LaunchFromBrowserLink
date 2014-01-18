@@ -25,7 +25,7 @@ public class MainActivity extends Activity
 		{
 			Toast.makeText(this, "Du hast es geschafft", Toast.LENGTH_LONG);		
 		} else {
-			String url = "http://dieletztedomain.de/";
+			String url = "http://www.dieletztedomain.de/com-jentsch-launchfrombrowser/";
 			Uri uriUrl = Uri.parse(url);
 			Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
 			startActivity(launchBrowser);
