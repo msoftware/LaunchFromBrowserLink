@@ -1,11 +1,10 @@
 package com.jentsch.launchfrombrowser;
 
 import android.app.*;
-import android.os.*;
-import android.view.*;
-import android.widget.*;
+import android.content.*;
 import android.net.*;
-import java.util.*;
+import android.os.*;
+import android.widget.*;
 
 public class MainActivity extends Activity
 {
@@ -15,21 +14,22 @@ public class MainActivity extends Activity
 	{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-		String info = "";
+		String info = "Launch Params: ";
 		try {
-			info = getIntent().getDataString();
-			Uri data = getIntent().getData();
-			String scheme = data.getScheme(); // "http"
-			String host = data.getHost(); // "twitter.com"
-			List<String> params = data.getPathSegments();
-			String first = params.get(0); // "status"
-			String second = params.get(1); // "1234"
-		
-			info = scheme + " " + host + " " + first + " " + second;
+			info += " " + getIntent().getDataString();
 		} catch (Exception e) {
 			info += " " + e.toString();
 		}
 		((TextView)findViewById(R.id.info)).setText(info);
+		if (info.indexOf("Herzlichen Glückwunsch") >= 0)
+		{
+			Toast.makeText(this, "Du hast es geschafft", Toast.LENGTH_LONG);		
+		} else {
+			String url = "http://dieletztedomain.de/";
+			Uri uriUrl = Uri.parse(url);
+			Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+			startActivity(launchBrowser);
+		}
 		
     }
 }
